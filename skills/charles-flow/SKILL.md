@@ -61,7 +61,7 @@ Feature, debug, polish and fast-flow run the loop below; each command says only 
    `run-state.sh phase "$(pwd)" review "no-mistakes: passed, <PR url>"`.
 6. **Green, sign off, close.** `green.sh`, complete `## Sign-off`, `run-state.sh close`.
 
-Record `run-state.sh phase` at implement, review and green, with real output
+Record `run-state.sh phase` at implement, review and verify (the green run), with real output
 (`47 passed, 0 failed`, not "tests pass"). A discovery you cannot finish now is
 `run-state.sh defer "$(pwd)" "<text>"`, not a new dispatch.
 
