@@ -42,3 +42,7 @@ cost per fix within 1.5x plain, hidden-test pass rate no lower than 3.2.1's.
 - [x] **R7** Version bumped to 3.3.0 in `.claude-plugin/plugin.json` and both `version` fields of `.claude-plugin/marketplace.json`. — grep shows 3.3.0 at all three
 
 Green: selftest 484 PASS (baseline 483), doctor 21 ok, 0 failing.
+
+## Run outcome — 2026-11-16
+
+short path committed on branch lean-small-fix (cf9440e); bench proof pending
