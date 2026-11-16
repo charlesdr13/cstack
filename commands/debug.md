@@ -8,11 +8,13 @@ Debug: $ARGUMENTS
 
 Every extra turn re-reads the whole context, so a small fix skips the paperwork.
 It is small when the confirmed fix touches at most 2 non-test source files and
-about 40 changed lines, and touches none of: auth, permissions or tenant scoping;
+about 40 changed lines, and touches none of: auth, permissions or tenant scoping (who may see or
+change which client's data, roles, seats);
 money or billing; migrations or schema; deletes or other data loss; concurrency;
 sending messages or other external writes; this flow's own machinery. A shared
 helper counts as risky when any grepped caller is in one of those areas. It also
 needs `codex-run` on PATH and a `.charles.toml`; without either, use the full loop.
+Unsure whether it is risky: it is.
 
 1. Steps 1-3 below: one command red on the exact symptom, the cause confirmed
    from source with `file:line`.

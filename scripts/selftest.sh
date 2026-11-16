@@ -5722,7 +5722,7 @@ short_ok=1
 for want in 'auth, permissions or tenant scoping' 'money or billing' 'migrations or schema' \
   'deletes or other data loss' 'concurrency' 'own machinery' 'at most 2 non-test source files' \
   'the spec doc' 'the review lane' 'switch to' 'green.sh" "$(pwd)"` once, at the end' \
-  'any grepped caller' 'external writes' '.charles.toml' 'watch it fail'; do
+  'any grepped caller' 'external writes' '.charles.toml' 'watch it fail' 'roles, seats' 'Unsure whether it is risky: it is.'; do
   printf '%s' "$short_body" | grep -qF -- "$want" || { short_ok=0; echo "        missing: $want"; }
 done
 if [ "$short_ok" = 1 ] && [ -n "$short_line" ] && [ -n "$full_line" ] && [ "$short_line" -lt "$full_line" ] \
