@@ -43,7 +43,7 @@ SCRIPTS="$(dirname "$(readlink -f "$(command -v codex-run)")")"
    `"$SCRIPTS/run-state.sh" close "$(pwd)" "<outcome>" --spec docs/specs/<plan>.md`.
    At most two implement/review/green cycles, then a `FAILED` item and a report.
 
-Record `run-state.sh phase` at implement, review and green. Any lane failure,
+Record `run-state.sh phase` at implement, review and verify (the green run). Any lane failure,
 non-zero `verify-receipt.sh`, or review exit 3 records
 `"$SCRIPTS/run-state.sh" item "$(pwd)" FAILED "<what failed>"` and stops; never
 rescue a failed lane inline. Never pass `--fast` or `--effort` to a luna lane
