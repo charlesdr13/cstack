@@ -5713,6 +5713,27 @@ else
   echo "  FAIL  flow docs must spell out dispatchable requirement bullets"; fail=$((fail+1))
 fi
 
+# Small debug fixes take a short path: no spec, run-state or review, one final green.
+debug_doc="$REPO_ROOT/commands/debug.md"
+short_body="$(awk '/^## Small fix: the short path$/{on=1;next} /^## /{on=0} on' "$debug_doc")"
+short_line="$(grep -nF '## Small fix: the short path' "$debug_doc" | head -1 | cut -d: -f1)"
+full_line="$(grep -nF '## Full loop' "$debug_doc" | head -1 | cut -d: -f1)"
+short_ok=1
+for want in 'auth, permissions or tenant scoping' 'money or billing' 'migrations or schema' \
+  'deletes or other data loss' 'concurrency' 'own machinery' 'at most 2 non-test source files' \
+  'the spec doc' 'the review lane' 'switch to' 'green.sh" "$(pwd)"` once, at the end' \
+  'any grepped caller' 'external writes' '.charles.toml' 'watch it fail' 'roles, seats' 'Unsure whether it is risky: it is.'; do
+  printf '%s' "$short_body" | grep -qF -- "$want" || { short_ok=0; echo "        missing: $want"; }
+done
+if [ "$short_ok" = 1 ] && [ -n "$short_line" ] && [ -n "$full_line" ] && [ "$short_line" -lt "$full_line" ] \
+  && [ "$(printf '%s' "$short_body" | grep -oF '$SCRIPTS/green.sh' | wc -l)" -eq 1 ] \
+  && ! printf '%s' "$short_body" | grep -qE 'run-state\.sh`? (init|phase|close)' \
+  && grep -qF 'short path at the top of `commands/debug.md`' "$flow_skill"; then
+  echo "  PASS  debug short path comes first, names the risk limits and skips the paperwork"; pass=$((pass+1))
+else
+  echo "  FAIL  debug short path is missing, out of order or incomplete"; fail=$((fail+1))
+fi
+
 # --- R5 grill gate ------------------------------------------------------------
 R5DIR="$BOX/r5-grill"; mkdir -p "$R5DIR/bin" "$R5DIR/docs/specs" "$R5DIR/.charles/runs/open-run"
 cp "$REQDIR/bin/codex" "$R5DIR/bin/codex"

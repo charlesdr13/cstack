@@ -1,10 +1,37 @@
 ---
-description: Debug flow — the lean loop, reproduce and confirm the cause from source first
+description: Debug flow — a short path for small low-risk fixes, else the lean loop; reproduce and confirm the cause from source first
 ---
 
-Run the **lean loop** from the `charles-flow` skill on: $ARGUMENTS
+Debug: $ARGUMENTS
 
-Differs from the default only here: reproduce first, and confirm the cause from
+## Small fix: the short path
+
+Every extra turn re-reads the whole context, so a small fix skips the paperwork.
+It is small when the confirmed fix touches at most 2 non-test source files and
+about 40 changed lines, and touches none of: auth, permissions or tenant scoping (who may see or
+change which client's data, roles, seats);
+money or billing; migrations or schema; deletes or other data loss; concurrency;
+sending messages or other external writes; this flow's own machinery. A shared
+helper counts as risky when any grepped caller is in one of those areas. It also
+needs `codex-run` on PATH and a `.charles.toml`; without either, use the full loop.
+Unsure whether it is risky: it is.
+
+1. Steps 1-3 below: one command red on the exact symptom, the cause confirmed
+   from source with `file:line`.
+2. Grep every caller, write the failing test and watch it fail, fix, re-run the
+   loop until green.
+3. Run `"$SCRIPTS/green.sh" "$(pwd)"` once, at the end, with
+   `SCRIPTS="$(dirname "$(readlink -f "$(command -v codex-run)")")"`.
+4. Report as below (symptom, red output, cause, fix, green output).
+
+Skip on this path: loading the `charles-flow` skill, the spec doc, `run-state.sh`,
+the baseline `green.sh` and the review lane. If the fix outgrows the size or risk
+limit while you work, or the final green is red, say so in one line and switch to
+the full loop below: load the skill, write the plan, open the run, carry on.
+
+## Full loop
+
+Run the **lean loop** from the `charles-flow` skill. Differs from the default only here: reproduce first, and confirm the cause from
 source yourself before planning. Explore lanes, if any, return a cause with
 `file:line` evidence, never a patch. The plan holds the confirmed cause, the fix
 scope and the green command; the review asks whether the diff fixes that cause and
