@@ -9,7 +9,7 @@ Default loop: **plan, implement, one isolated review, green, close.** The
 orchestrator reads code and makes small edits itself. Lanes exist for breadth and
 parallelism, not as a toll booth.
 
-Small asks skip the flow. `SCRIPTS="$(dirname "$(readlink -f "$(command -v codex-run)")")"`
+Small asks skip the flow; a small, low-risk bug fix takes the short path at the top of `commands/debug.md`. `SCRIPTS="$(dirname "$(readlink -f "$(command -v codex-run)")")"`
 (no `codex-run` on PATH: stop, "run cstack's scripts/install-skills.sh"). No `.charles.toml`?
 Run `"$SCRIPTS/init-repo.sh" "$(pwd)"` (infers green), say so in one line, carry on.
 
