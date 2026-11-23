@@ -35,7 +35,7 @@ flowchart TD
     IMPL --> REV["one isolated review per run<br/><b>sol @ medium · luna/terra @ max</b>"]
     REV --> GREEN{"green.sh<br/>real exit code"}
 
-    GREEN -->|"red, under 3 cycles"| IMPL
+    GREEN -->|"red, under 3 cycles: fix inline, no re-review"| GREEN
     GREEN -->|"red, 3 cycles"| FAILED["FAILED item"]
     GREEN -->|green| CLOSE["sign-off · close run<br/>outcome → the committed plan"]
 

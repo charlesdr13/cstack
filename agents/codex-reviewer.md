@@ -1,6 +1,6 @@
 ---
 name: codex-reviewer
-description: Dispatches an adversarial review to gpt-6.1-sol at medium by default, or gpt-6-luna/gpt-6-astra (luna/terra engines) at max, or grok-4.6 at high, when selected with --engine; --effort overrides. The review is isolated in a temp dir holding only the plan and the diff. Use once per run, after the last implement, before declaring work done. The reviewer cannot see the repo or the implementer's reasoning.
+description: Dispatches an adversarial review to gpt-6.1-sol at medium by default, or gpt-6-luna/gpt-6-astra (luna/terra engines) at max, or grok-4.6 at high, when selected with --engine; --effort overrides. The review is isolated in a temp dir holding only the plan and the diff. Use once per run, after the last implement (plus once per fix slice), before declaring work done. The reviewer cannot see the repo or the implementer's reasoning.
 model: haiku
 tools: Bash, Read
 ---
