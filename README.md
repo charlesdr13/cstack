@@ -32,7 +32,7 @@ flowchart TD
     PLAN -.->|"risky: money · auth · migrations · 10+ reqs"| GRILL["grill-rounds"]
     GRILL -.-> IMPL
     PLAN --> IMPL["implement<br/>small edits inline · bigger slices on lanes<br/>parallel worktrees at 2+ slices"]
-    IMPL --> REV["one isolated review, max 2 rounds<br/><b>sol @ medium · luna/terra @ max</b>"]
+    IMPL --> REV["one isolated review per run<br/><b>sol @ medium · luna/terra @ max</b>"]
     REV --> GREEN{"green.sh<br/>real exit code"}
 
     GREEN -->|"red, under 3 cycles"| IMPL

@@ -43,14 +43,14 @@ Feature, debug, polish and fast-flow run the loop below; each command says only 
 4. **Implement.** Small, obvious edits: do them yourself. Anything bigger goes to
    implement lanes, one per disjoint slice, in parallel worktrees when there are
    2 or more (see Parallel). Dispatch with `--req <IDs>`.
-5. **Review once.** One isolated review against the plan, at most 2 rounds:
-   round 2 re-checks only round 1's Critical and Required findings. A GAPS verdict
-   that only asks for more tests becomes a `DEFERRED` item. A third round only for
-   money, auth/security or data-loss changes. Never feed the reviewer the
-   implementer's output.
-   **Prove before fixing:** run each `Critical:`/`Required:` finding's `Repro:` in the
-   implemented tree. Fix only proven ones (the run shows the failure); round 2
-   re-checks only those. Unproven ones become
+5. **Review once.** One isolated review per run, after the last implement. A GAPS
+   verdict that only asks for more tests becomes a `DEFERRED` item. Never feed the
+   reviewer the implementer's output. **Prove before fixing:** run each
+   `Critical:`/`Required:` finding's `Repro:` in the implemented tree. Fix only proven
+   ones (the run shows the failure), inline; a fix that needs a lane is a new slice
+   with its own review. A fix is proved by its `Repro:` passing plus `green.sh`, no
+   second review; a round 2 on the fixes only for money, auth/security or data-loss
+   changes. Unproven ones become
    `DEFERRED "unproven: <finding>"`. Check from source instead: findings with no
    `Repro:` line (a missing requirement or check), and any `Critical:` on money,
    auth/security or data loss. Sign-off: `review: <n> proven, <m> dropped`.
